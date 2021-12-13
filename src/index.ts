@@ -1,37 +1,28 @@
-import dotenv from 'dotenv'
-import mongoose from 'mongoose'
-import express from 'express'
-import config from './config';
+import dotenv from 'dotenv';
+import express from 'express';
+import mongoose from 'mongoose';
 import { apiRouter } from './routes/api.routes';
 
-dotenv.config()
+dotenv.config();
 
 const app = express();
-app.use(express.json())
-app.use(apiRouter)
+app.use(express.json());
+app.use(apiRouter);
 
 const ENV_VARS = {
-  port : process.env.PORT,
-  mongoURI : process.env.MONGO_URI,
-  token_secret : process.env.TOKEN_SECRET
+  port: process.env.PORT,
+  mongoURI: process.env.MONGO_URI,
+  token_secret: process.env.TOKEN_SECRET
 }
 
-const mongoURI = process.env.MONGO_URI as string || undefined
-const port = process.env.PORT
+app.listen(ENV_VARS.port, async () => {
+  console.log('Server funcionando na porta: ', ENV_VARS.port);
 
-app.listen(port, async () => {
-  console.log('Server funcionando na porta ', port)
-
-  if(mongoURI){
-    mongoose.connect(mongoURI)
+  if (ENV_VARS.mongoURI) {
+    mongoose.connect(ENV_VARS.mongoURI);
   } else {
-    console.log('Erro na conexao com db')
+    console.log('Erro na conexão com DB.');
   }
+});
 
-  
-})
-
-export {
-  ENV_VARS
-}
-
+export { ENV_VARS }
