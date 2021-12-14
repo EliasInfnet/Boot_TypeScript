@@ -1,14 +1,15 @@
-import { Document, Schema, model } from "mongoose";
+import { Document, Schema, model } from 'mongoose';
 
-interface movieDocument {
-  name: string
-  category: string
-  description: string
-  poster: string
-  backdrop?: string
+interface MovieDocument {
+  name: string;
+  category: string;
+  description: string;
+  media_type: string;
+  poster: string;
+  backdrop?: string;
 }
 
-const MovieSchema = new Schema<movieDocument>(
+const MovieSchema = new Schema(
   {
     name: {
       type: String,
@@ -22,19 +23,27 @@ const MovieSchema = new Schema<movieDocument>(
       type: String,
       required: true
     },
+    media_type: {
+      type: String,
+      required: true
+    },
     poster: {
       type: String,
       required: true
     },
     backdrop: {
       type: String
-    }
+    },
   },
   {
     timestamps: true
+    /*
+    createdAt: Date
+    updatedAt: Date
+    */
   }
-)
+);
 
-const Movie = model<movieDocument>('Movie' , MovieSchema)
+const Movie = model<MovieDocument>("Movie", MovieSchema);
 
-export { Movie }
+export { Movie };

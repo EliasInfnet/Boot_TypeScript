@@ -9,9 +9,9 @@ const apiRouter = Router();
 /* ROTAS GERAIS */
 
 apiRouter.get('/', (req, res) => {
-    return res.json({
-        message: 'Nossa primeira rota de API'
-    });
+  return res.json({
+    message: 'Nossa primeira rota de API'
+  });
 });
 
 /* ROTAS DE USUÁRIO */
