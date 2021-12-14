@@ -1,13 +1,6 @@
 import { Request, Response } from 'express';
 import { User } from '../models/user.model';
 
-interface UserResult {
-  _id: string;
-  name: string;
-  email?: string;
-  password?: string;
-}
-
 async function view(req: Request, res: Response) {
   const { id } = req.params;
 
